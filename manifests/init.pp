@@ -68,7 +68,7 @@ class certbot (
   $unsafe_registration = $certbot::params::unsafe_registration,
   $certonly            = {},
 ) inherits certbot::params {
-  validate_string($path, $repo, $version, $config_file, $package_name, $package_command)
+  validate_string($path, $repo, $version, $config_file, $package_command)
   if $email {
     validate_string($email)
   }

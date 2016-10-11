@@ -41,7 +41,7 @@ class certbot::install (
 ) {
   validate_bool($manage_install, $manage_dependencies, $configure_epel)
   validate_re($install_method, ['^package$', '^vcs$'])
-  validate_string($path, $repo, $version, $package_name)
+  validate_string($path, $repo, $version)
 
   if $install_method == 'vcs' {
     if $manage_dependencies {
@@ -57,9 +57,8 @@ class certbot::install (
       revision => $version,
     }
   } else {
-    package { 'certbot':
+    package { $package_name:
       ensure => $package_ensure,
-      name   => $package_name,
     }
 
     if $configure_epel {
