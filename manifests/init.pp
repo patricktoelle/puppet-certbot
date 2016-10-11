@@ -66,6 +66,7 @@ class certbot (
   $install_method      = $certbot::params::install_method,
   $agree_tos           = $certbot::params::agree_tos,
   $unsafe_registration = $certbot::params::unsafe_registration,
+  $certonly            = {},
 ) inherits certbot::params {
   validate_string($path, $repo, $version, $config_file, $package_name, $package_command)
   if $email {
@@ -101,4 +102,6 @@ class certbot (
     environment => concat([ "VENV_PATH=${venv_path}" ], $environment),
     refreshonly => true,
   }
+
+  create_resources('certbot::certonly', $certonly)
 }
