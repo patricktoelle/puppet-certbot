@@ -67,7 +67,7 @@ define certbot::certonly (
     path        => $::path,
     environment => concat([ $venv_path_var ], $environment),
     creates     => $live_path,
-    require     => Class['certbot'],
+    require     => Class['certbot::install'],
   }
 
   if $manage_cron {
